@@ -37,6 +37,7 @@ namespace Сalculator_for_tailoring_curtains.components.entity
             button.Visible = false;
             button.Click += new EventHandler(buttonAction);
             listView = new ListView();
+            listView.FullRowSelect = true;
             ColumnHeader imageHeader = new ColumnHeader();
             imageHeader.Text = "Images";
             imageHeader.Width = 300;
@@ -47,12 +48,21 @@ namespace Сalculator_for_tailoring_curtains.components.entity
             descriptionHeader.TextAlign = HorizontalAlignment.Left;
             listView.Columns.Add(imageHeader);
             listView.Columns.Add(descriptionHeader);
-            ListViewItem listViewItem = new ListViewItem();
-            listViewItem.
-            listView.Items.Add()
+            ImageList imageList = new ImageList();
+            imageList.ImageSize = new Size(100, 100);
+            imageList.Images.Add(Image.FromFile("C:\\Users\\Anton\\Pictures\\tuD0uorzYzM.jpg"));
+            listView.LargeImageList = imageList;
+            listView.Items.Add("description", 0);
+            listView.ItemSelectionChanged += selectedItem;
             panel.addControl(checkBox);
             panel.addControl(button);
+            panel.addControl(listView);
             return panel;
+        }
+
+        private void selectedItem(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            Console.Out.WriteLine(e.ItemIndex + " is selected");
         }
 
         private void showList(object sender, EventArgs args)
