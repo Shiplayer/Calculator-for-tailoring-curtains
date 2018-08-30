@@ -54,7 +54,6 @@
             this.tlp_container.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlp_container.Size = new System.Drawing.Size(536, 340);
             this.tlp_container.TabIndex = 0;
-            this.tlp_container.CellPaint += new System.Windows.Forms.TableLayoutCellPaintEventHandler(this.tlp_container_CellPaint);
             // 
             // button1
             // 

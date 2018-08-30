@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  type = 0 - чекбокс со списком
+  type = 1 - чекбокс с полем ввода или выбора между n и m
+  type = 2 - чекбокс со списком и полем ввода или выбора между n и m
+-->
+<CalculationComponents>
+  <Component type="0">
+    <Name>Обработка верха шторной лентой</Name>
+    <Description>складка "карандаш"</Description>
+    <KeyValues>
+      <key value="2">коэфф 1:2,0</key>
+      <key value="2.5">коэфф 1:2,5</key>
+      <key value="3">коэфф 1:3,0</key>
+    </KeyValues>
+    <Plus>
+    </Plus>
+  </Component>
+  <Component type="0">
+    <Name>Обработка верха cghfdf лентой</Name>
+    <Description>складка "карандаш"</Description>
+    <KeyValues>
+      <key value="2">коэфф 1:2,0</key>
+      <key value="2.5">коэфф 1:2,5</key>
+      <key value="3">коэфф 1:3,0</key>
+    </KeyValues>
+    <Plus>
+    </Plus>
+  </Component>
+</CalculationComponents>

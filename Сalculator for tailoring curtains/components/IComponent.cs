@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace Сalculator_for_tailoring_curtains.components
 {
-    interface ISubEntity
+    interface IComponent
     {
         CalculationComponentsPanel getComponent();
+        void SetName(string text);
+        void SetDescription(string text);
+        void addKeyValue(string key, string value);
     }
 }

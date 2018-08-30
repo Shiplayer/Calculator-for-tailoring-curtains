@@ -8,77 +8,112 @@ using System.Windows.Forms;
 
 namespace Сalculator_for_tailoring_curtains.components.entity
 {
-    class ComponentWithList : ISubEntity
+    class ComponentWithList : IComponent
     {
         private static int count = 0;
         private string containText;
+        private string description;
         private bool checkboxDefaultValue = false;
         private List<string> valueList;
         private List<Image> imageList;
         private Button button;
         private ListView listView;
+        private PictureBox picture;
+        private CheckBox checkBox;
 
         public ComponentWithList()
         {
             containText = "test value" + count++;
             valueList = new List<string>();
+            initValueList();
             imageList = new List<Image>();
+            initImageList();
         }
 
         public CalculationComponentsPanel getComponent()
         {
             CalculationComponentsPanel panel = new CalculationComponentsPanel();
-            CheckBox checkBox = new CheckBox();
+            checkBox = new CheckBox();
             checkBox.Checked = checkboxDefaultValue;
             checkBox.Text = containText;
-            checkBox.CheckedChanged += new EventHandler(showList);
-            button = new Button();
-            button.Text = "Показать список";
-            button.Visible = false;
-            button.Click += new EventHandler(buttonAction);
-            listView = new ListView();
-            listView.FullRowSelect = true;
-            ColumnHeader imageHeader = new ColumnHeader();
+            checkBox.CheckedChanged += showList;
+            checkBox.AutoSize = true;
+            
+            /*ColumnHeader imageHeader = new ColumnHeader();
             imageHeader.Text = "Images";
             imageHeader.Width = 300;
             imageHeader.TextAlign = HorizontalAlignment.Center;
+
             ColumnHeader descriptionHeader = new ColumnHeader();
             descriptionHeader.Text = "description";
             descriptionHeader.Width = 400;
-            descriptionHeader.TextAlign = HorizontalAlignment.Left;
-            listView.Columns.Add(imageHeader);
-            listView.Columns.Add(descriptionHeader);
-            ImageList imageList = new ImageList();
-            imageList.ImageSize = new Size(100, 100);
-            imageList.Images.Add(Image.FromFile("C:\\Users\\Anton\\Pictures\\tuD0uorzYzM.jpg"));
-            listView.LargeImageList = imageList;
-            listView.Items.Add("description", 0);
-            listView.ItemSelectionChanged += selectedItem;
+            descriptionHeader.TextAlign = HorizontalAlignment.Left;*/
+
+            listView = new ListView();
+            listView.Visible = false;
+            listView.FullRowSelect = true;
+            listView.View = View.List;
+            //listView.Columns.Add(imageHeader);
+            //listView.Columns.Add(descriptionHeader);
+            foreach(string text in valueList)
+                listView.Items.Add(text);
+            if(imageList.Count > 1)
+                listView.ItemSelectionChanged += selectedItem;
+            
             panel.addControl(checkBox);
             panel.addControl(button);
             panel.addControl(listView);
+            if (imageList.Count == 1)
+            {
+                picture = new PictureBox();
+                picture.Size = new Size(70, 70);
+
+                picture.Image = imageList[0];
+                picture.SizeMode = PictureBoxSizeMode.Zoom;
+                panel.addControl(picture);
+            }
             return panel;
+        }
+
+        private void initValueList()
+        {
+            //valueList.
+        }
+
+        private void initImageList()
+        {
+
         }
 
         private void selectedItem(object sender, ListViewItemSelectionChangedEventArgs e)
         {
             Console.Out.WriteLine(e.ItemIndex + " is selected");
+            picture.Image = imageList[e.ItemIndex];
         }
 
         private void showList(object sender, EventArgs args)
         {
-            Console.Out.WriteLine("hello");
-            if (button.Visible)
-                button.Visible = false;
-            else
-                button.Visible = true;
+            listView.Visible = checkBox.Checked;
         }
 
         private void buttonAction(object sender, EventArgs args)
         {
-            Console.Out.WriteLine("show list from " + containText);
+            
         }
 
+        public void SetName(string text)
+        {
+            containText = text;
+        }
 
+        public void SetDescription(string text)
+        {
+            description = text;
+        }
+
+        public void addKeyValue(string key, string value)
+        {
+            valueList.Add(key);
+        }
     }
 }

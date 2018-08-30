@@ -37,7 +37,11 @@ namespace Сalculator_for_tailoring_curtains
         public ucCalculation()
         {
             InitializeComponent();
-           
+            CalculationComponents calculationComponents = new CalculationComponents();
+            foreach (components.IComponent component in calculationComponents.Components)
+            {
+                tableLayoutPanel1.Controls.Add(component.getComponent());
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -45,18 +49,6 @@ namespace Сalculator_for_tailoring_curtains
             ComponentWithList componentWithList = new ComponentWithList();
             label1.Text = "RowCount = " + tableLayoutPanel1.RowCount + "; ColumnCount = " + tableLayoutPanel1.ColumnCount;
             tableLayoutPanel1.Controls.Add(componentWithList.getComponent(), 1, tableLayoutPanel1.RowCount++);
-        }
-
-        private void tlp_container_CellPaint(object sender, TableLayoutCellPaintEventArgs e)
-        {
-            if(e.Row % 2 == 0)
-            {
-                e.Graphics.FillRectangle(Brushes.Black, e.CellBounds);
-            }
-            else
-            {
-                e.Graphics.FillRectangle(Brushes.Green, e.CellBounds);
-            }
         }
     }
 }

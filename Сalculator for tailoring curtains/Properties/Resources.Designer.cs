@@ -61,6 +61,34 @@ namespace Сalculator_for_tailoring_curtains.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+        ///&lt;!--
+        ///  type = 0 - чекбокс со списком
+        ///  type = 1 - чекбокс с полем ввода или выбора между n и m
+        ///  type = 2 - чекбокс со списком и полем ввода или выбора между n и m
+        ///--&gt;
+        ///&lt;CalcilationComponents&gt;
+        ///  &lt;Component type=&quot;0&quot;&gt;
+        ///    &lt;Name&gt;Обработка верха шторной лентой&lt;/Name&gt;
+        ///    &lt;Description&gt;
+        ///      складка &quot;карандаш&quot;
+        ///    &lt;/Description&gt;
+        ///    &lt;KeyVaues&gt;
+        ///      &lt;key value=&quot;2&quot;&gt;
+        ///        коэфф 1:2,0
+        ///      &lt;/key&gt;
+        ///      &lt;key value=&quot;2.5&quot;&gt;
+        ///        коэфф 1:2,5
+        ///      &lt;/key&gt;
+        ///  [остаток строки не уместился]&quot;;.
+        /// </summary>
+        internal static string testData {
+            get {
+                return ResourceManager.GetString("testData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap two_star_rating {
