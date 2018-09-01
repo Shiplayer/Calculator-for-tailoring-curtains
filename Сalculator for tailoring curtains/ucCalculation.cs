@@ -24,6 +24,7 @@ namespace Сalculator_for_tailoring_curtains
                 if(_instance == null)
                 {
                     _instance = new ucCalculation();
+                    _instance.Dock = DockStyle.Fill;
                 }
                 return _instance;
             }
@@ -38,7 +39,7 @@ namespace Сalculator_for_tailoring_curtains
         {
             InitializeComponent();
             CalculationComponents calculationComponents = new CalculationComponents();
-            foreach (components.IComponent component in calculationComponents.Components)
+            foreach (components.AbstractComponent component in calculationComponents.Components)
             {
                 tableLayoutPanel1.Controls.Add(component.getComponent());
             }

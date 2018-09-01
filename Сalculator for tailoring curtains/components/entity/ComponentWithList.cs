@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Сalculator_for_tailoring_curtains.components.entity
 {
-    class ComponentWithList : IComponent
+    class ComponentWithList : AbstractComponent
     {
         private static int count = 0;
         private string containText;
@@ -30,7 +30,7 @@ namespace Сalculator_for_tailoring_curtains.components.entity
             initImageList();
         }
 
-        public CalculationComponentsPanel getComponent()
+        public override CalculationComponentsPanel getComponent()
         {
             CalculationComponentsPanel panel = new CalculationComponentsPanel();
             checkBox = new CheckBox();
@@ -101,17 +101,17 @@ namespace Сalculator_for_tailoring_curtains.components.entity
             
         }
 
-        public void SetName(string text)
+        public override void SetName(string text)
         {
             containText = text;
         }
 
-        public void SetDescription(string text)
+        public override void SetDescription(string text)
         {
             description = text;
         }
 
-        public void addKeyValue(string key, string value)
+        public override void addKeyValue(string key, string value)
         {
             valueList.Add(key);
         }

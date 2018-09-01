@@ -12,7 +12,7 @@ namespace Сalculator_for_tailoring_curtains.components
 {
     class CalculationComponents
     {
-        private List<IComponent> components;
+        private List<AbstractComponent> components;
 
         public CalculationComponents()
         {
@@ -24,8 +24,8 @@ namespace Сalculator_for_tailoring_curtains.components
             
             using (XmlReader reader = XmlReader.Create(new StringReader(Resources.testData)))
             {
-                components = new List<IComponent>();
-                IComponent component = null;
+                components = new List<AbstractComponent>();
+                AbstractComponent component = null;
                 reader.MoveToContent();
                 while (reader.Read())
                 {
@@ -67,7 +67,7 @@ namespace Сalculator_for_tailoring_curtains.components
             }
         }
 
-        public List<IComponent> Components
+        public List<AbstractComponent> Components
         {
             get { return components; }
             set { this.components = value; }

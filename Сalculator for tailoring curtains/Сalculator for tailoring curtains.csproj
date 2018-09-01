@@ -52,7 +52,8 @@
     <Compile Include="components\ComponentEntity.cs" />
     <Compile Include="components\ComponentFactory.cs" />
     <Compile Include="components\entity\ComponentWithList.cs" />
-    <Compile Include="components\IComponent.cs" />
+    <Compile Include="components\AbstractComponent.cs" />
+    <Compile Include="components\operation\ComponentOperation.cs" />
     <Compile Include="components\SubEntity.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

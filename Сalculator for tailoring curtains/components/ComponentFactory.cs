@@ -8,7 +8,7 @@ namespace Сalculator_for_tailoring_curtains.components
 {
     class ComponentFactory
     {
-        public static IComponent getComponent(int type)
+        public static AbstractComponent getComponent(int type)
         {
             if(type == 0)
             {

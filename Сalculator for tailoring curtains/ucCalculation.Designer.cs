@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.tlp_container = new System.Windows.Forms.TableLayoutPanel();
-            this.button1 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.tlp_container.SuspendLayout();
             this.SuspendLayout();
@@ -45,30 +45,20 @@
             this.tlp_container.Controls.Add(this.tableLayoutPanel1, 0, 0);
             this.tlp_container.Controls.Add(this.button1, 0, 1);
             this.tlp_container.Controls.Add(this.label1, 0, 2);
-            this.tlp_container.Location = new System.Drawing.Point(4, 4);
+            this.tlp_container.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlp_container.Location = new System.Drawing.Point(0, 0);
             this.tlp_container.Name = "tlp_container";
             this.tlp_container.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.tlp_container.RowCount = 3;
             this.tlp_container.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlp_container.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlp_container.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlp_container.Size = new System.Drawing.Size(536, 340);
+            this.tlp_container.Size = new System.Drawing.Size(543, 347);
             this.tlp_container.TabIndex = 0;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(458, 294);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.AutoScroll = true;
-            this.tableLayoutPanel1.AutoSize = true;
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -77,13 +67,23 @@
             this.tableLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(530, 285);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(537, 292);
             this.tableLayoutPanel1.TabIndex = 1;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(465, 301);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(498, 320);
+            this.label1.Location = new System.Drawing.Point(505, 327);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 2;
@@ -93,6 +93,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.Controls.Add(this.tlp_container);
             this.Name = "ucCalculation";
             this.Size = new System.Drawing.Size(543, 347);
