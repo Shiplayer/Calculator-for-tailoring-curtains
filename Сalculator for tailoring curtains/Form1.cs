@@ -15,7 +15,9 @@ namespace Сalculator_for_tailoring_curtains
         public Form1()
         {
             InitializeComponent();
-            panel1.Controls.Add(ucCalculation.Instance);
+            OrderEntity.CreateInstance();
+            splitContainer1.Panel1.Controls.Add(ucCanvas.Instance);
+            //panel1.Controls.Add(ucCalculation.Instance);
         }
     }
 }
