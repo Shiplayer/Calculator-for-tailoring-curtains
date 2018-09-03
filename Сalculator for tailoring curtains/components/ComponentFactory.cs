@@ -12,7 +12,7 @@ namespace Сalculator_for_tailoring_curtains.components
         {
             if(type == 0)
             {
-                return new entity.ComponentWithList();
+                return null;//new entity.ComponentWithList();
             }
             return null;
         }

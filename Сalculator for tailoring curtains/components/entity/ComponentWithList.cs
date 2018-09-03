@@ -20,14 +20,21 @@ namespace Сalculator_for_tailoring_curtains.components.entity
         private ComboBox comboBox;
         private PictureBox picture;
         private CheckBox checkBox;
+        private PropertyCanvas propertyCanvas;
 
-        public ComponentWithList()
+        public ComponentWithList(CanvasEntity entity) : base(entity)
         {
             containText = "test value" + count++;
             valueList = new List<string>();
             initValueList();
             imageList = new List<Image>();
             initImageList();
+        }
+
+        public PropertyCanvas PropertyCanvas
+        {
+            get { return propertyCanvas; }
+            set { propertyCanvas = value; }
         }
 
         public override CalculationComponentsPanel getComponent()

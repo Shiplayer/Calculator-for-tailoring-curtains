@@ -38,18 +38,19 @@ namespace Сalculator_for_tailoring_curtains
         public ucCalculation()
         {
             InitializeComponent();
-            CalculationComponents calculationComponents = new CalculationComponents();
-            foreach (components.AbstractComponent component in calculationComponents.Components)
+            for (int i = 0; i < OrderEntity.Instance.Size; i++)
             {
-                tableLayoutPanel1.Controls.Add(component.getComponent());
+                CalculationComponents calculationComponents = new CalculationComponents(OrderEntity.Instance.GetCanvasEntity(i));
+                tableLayoutPanel1.RowCount++;
+                tableLayoutPanel1.Controls.Add(calculationComponents.getRootComponent());
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            ComponentWithList componentWithList = new ComponentWithList();
+            //ComponentWithList componentWithList = new ComponentWithList();
             label1.Text = "RowCount = " + tableLayoutPanel1.RowCount + "; ColumnCount = " + tableLayoutPanel1.ColumnCount;
-            tableLayoutPanel1.Controls.Add(componentWithList.getComponent(), 1, tableLayoutPanel1.RowCount++);
+            //tableLayoutPanel1.Controls.Add(componentWithList.getComponent(), 1, tableLayoutPanel1.RowCount++);
         }
     }
 }

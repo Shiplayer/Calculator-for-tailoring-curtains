@@ -158,6 +158,11 @@ namespace Сalculator_for_tailoring_curtains.components
             }
         }
 
+        public CanvasEntity GetCanvasEntity()
+        {
+            return canvasEntity;
+        }
+
         private void Numeric_KeyPress(object sender, KeyPressEventArgs e)
         {
             throw new NotImplementedException();

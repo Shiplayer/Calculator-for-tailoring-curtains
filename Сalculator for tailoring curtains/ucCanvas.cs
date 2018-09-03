@@ -67,6 +67,7 @@ namespace Сalculator_for_tailoring_curtains
             tableLayoutPanel1.Controls.Add(box);
             box.attachCanvasEntity();
             groupBoxes.Add(box);
+            OrderEntity.Instance.AddCanvasEntity(box.GetCanvasEntity());
         }
     }
 }

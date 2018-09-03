@@ -16,11 +16,18 @@ namespace Сalculator_for_tailoring_curtains.components.entity
         private bool checkboxDefaultValue = false;
         private ComboBox comboBox;
         private NumericUpDown numeric;
+        private PropertyCanvas propertyCanvas;
 
-        public ComponentWithListAndInput()
+        public ComponentWithListAndInput(CanvasEntity entity) : base(entity)
         {
             valueComboBox = new List<string>();
-            initValueList();
+            //initValueList();
+        }
+
+        public PropertyCanvas PropertyCanvas
+        {
+            get { return propertyCanvas; }
+            set { propertyCanvas = value; }
         }
 
         public override void AddValueInList(string value)
@@ -51,6 +58,7 @@ namespace Сalculator_for_tailoring_curtains.components.entity
             comboBox.Visible = false;
 
             numeric = new NumericUpDown();
+            numeric.DecimalPlaces = 2;
             numeric.Visible = false;
             numeric.Minimum = 0.1M;
             numeric.Increment = 0.1M;
@@ -85,7 +93,7 @@ namespace Сalculator_for_tailoring_curtains.components.entity
             numeric.Visible = true;
         }
 
-        public void showList(object sender, EventArgs eventArgs)
+        private void showList(object sender, EventArgs eventArgs)
         {
             comboBox.Visible = checkBox.Checked;
         }
@@ -97,7 +105,7 @@ namespace Сalculator_for_tailoring_curtains.components.entity
 
         public override void SetName(string text)
         {
-            throw new NotImplementedException();
+            name = text;
         }
 
         private void initValueList()

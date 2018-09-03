@@ -14,13 +14,16 @@ namespace Сalculator_for_tailoring_curtains.components.entity
         private string description;
         private bool checkboxDefaultValue = false;
         private NumericUpDown numeric;
-        private TYPE_OF_PROPERTIES type;
+        private PropertyCanvas propertyCanvas;
 
-        public ComponentWithInput()
+        public ComponentWithInput(CanvasEntity entity) : base(entity)
         {
-            numeric = new NumericUpDown();
-            numeric.Minimum = 1;
-            numeric.Maximum = 200;
+        }
+
+        public PropertyCanvas PropertyCanvas
+        {
+            get { return propertyCanvas; }
+            set { propertyCanvas = value; }
         }
 
         public override void AddValueInList(string value)
@@ -30,7 +33,27 @@ namespace Сalculator_for_tailoring_curtains.components.entity
 
         public override CalculationComponentsPanel getComponent()
         {
-            throw new NotImplementedException();
+            CalculationComponentsPanel panel = new CalculationComponentsPanel();
+            checkBox = new CheckBox();
+            checkBox.Text = name;
+            checkBox.AutoSize = true;
+            checkBox.CheckedChanged += CheckBox_ShowNumericComponent;
+            
+            numeric = new NumericUpDown();
+            numeric.Minimum = 0.1M;
+            numeric.Maximum = 10;
+            numeric.DecimalPlaces = 2;
+            numeric.Increment = 0.1M;
+            numeric.Visible = false;
+
+            panel.addControl(checkBox);
+            panel.addControl(numeric);
+            return panel;
+        }
+
+        private void CheckBox_ShowNumericComponent(object sender, EventArgs e)
+        {
+            numeric.Visible = checkBox.Checked;
         }
 
         public override void SetDescription(string text)
@@ -40,7 +63,7 @@ namespace Сalculator_for_tailoring_curtains.components.entity
 
         public override void SetName(string text)
         {
-            throw new NotImplementedException();
+            name = text;
         }
     }
 }

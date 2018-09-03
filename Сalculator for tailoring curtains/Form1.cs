@@ -14,6 +14,7 @@ namespace Сalculator_for_tailoring_curtains
     {
         private List<UserControl> userControls;
         private int index = 0;
+        private bool test = false;
         public Form1()
         {
             InitializeComponent();
@@ -29,6 +30,11 @@ namespace Сalculator_for_tailoring_curtains
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (!test)
+            {
+                numericUpDown1.Value = OrderEntity.Instance.Size;
+                test = !test;
+            }
             if (!splitContainer1.Panel1.Controls.Contains(userControls[++index]))
             {
                 splitContainer1.Panel1.Controls.Add(userControls[index]);
