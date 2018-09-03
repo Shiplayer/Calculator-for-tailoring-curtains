@@ -6,11 +6,14 @@ using System.Threading.Tasks;
 
 namespace Сalculator_for_tailoring_curtains.components
 {
+    internal enum TYPE_OF_PROPERTIES {WIDTH, HEIGHT }
+    internal enum TYPE_OF_COMPONENTS { INPUT, LIST, INPUT_AND_LIST}
     abstract class AbstractComponent
     {
         public abstract CalculationComponentsPanel getComponent();
         public abstract void SetName(string text);
         public abstract void SetDescription(string text);
-        public abstract void addKeyValue(string key, string value);
+        public abstract void AddValueInList(string value);
+        public TYPE_OF_COMPONENTS Type { get; set; }
     }
 }

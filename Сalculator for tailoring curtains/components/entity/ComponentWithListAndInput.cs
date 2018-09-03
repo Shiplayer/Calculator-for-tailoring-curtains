@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,26 +7,25 @@ using System.Windows.Forms;
 
 namespace Сalculator_for_tailoring_curtains.components.entity
 {
-    class ComponentWithList : AbstractComponent
+    class ComponentWithListAndInput : AbstractComponent
     {
-        private static int count = 0;
-        private string containText;
+        private string name;
+        private CheckBox checkBox;
+        private List<string> valueComboBox;
         private string description;
         private bool checkboxDefaultValue = false;
-        private List<string> valueList;
-        private List<Image> imageList;
-        private Button button;
         private ComboBox comboBox;
-        private PictureBox picture;
-        private CheckBox checkBox;
+        private NumericUpDown numeric;
 
-        public ComponentWithList()
+        public ComponentWithListAndInput()
         {
-            containText = "test value" + count++;
-            valueList = new List<string>();
+            valueComboBox = new List<string>();
             initValueList();
-            imageList = new List<Image>();
-            initImageList();
+        }
+
+        public override void AddValueInList(string value)
+        {
+            valueComboBox.Add(value);
         }
 
         public override CalculationComponentsPanel getComponent()
@@ -35,7 +33,7 @@ namespace Сalculator_for_tailoring_curtains.components.entity
             CalculationComponentsPanel panel = new CalculationComponentsPanel();
             checkBox = new CheckBox();
             checkBox.Checked = checkboxDefaultValue;
-            checkBox.Text = containText;
+            checkBox.Text = name;
             checkBox.CheckedChanged += showList;
             checkBox.AutoSize = true;
 
@@ -49,22 +47,28 @@ namespace Сalculator_for_tailoring_curtains.components.entity
             descriptionHeader.Width = 400;
             descriptionHeader.TextAlign = HorizontalAlignment.Left;*/
             comboBox = new ComboBox();
-            comboBox.Text = "text";
+            comboBox.Text = "Выберите";
             comboBox.Visible = false;
+
+            numeric = new NumericUpDown();
+            numeric.Visible = false;
+            numeric.Minimum = 0.1M;
+            numeric.Increment = 0.1M;
+            numeric.Maximum = 10;
+
 
             //listView.View = View.List;
             //listView.Columns.Add(imageHeader);
             //listView.Columns.Add(descriptionHeader);
 
-            foreach(string text in valueList)
+            foreach (string text in valueComboBox)
                 comboBox.Items.Add(text);
-            if(imageList.Count > 1)
-                comboBox.SelectedValueChanged += selectedItem;
-            
+            comboBox.SelectedValueChanged += ComboBox_SelectedItem;
+
             panel.addControl(checkBox);
-            panel.addControl(button);
             panel.addControl(comboBox);
-            if (imageList.Count == 1)
+            panel.addControl(numeric);
+            /*if (imageList.Count == 1)
             {
                 picture = new PictureBox();
                 picture.Size = new Size(70, 70);
@@ -72,49 +76,35 @@ namespace Сalculator_for_tailoring_curtains.components.entity
                 picture.Image = imageList[0];
                 picture.SizeMode = PictureBoxSizeMode.Zoom;
                 panel.addControl(picture);
-            }
+            }*/
             return panel;
         }
 
-        private void initValueList()
+        private void ComboBox_SelectedItem(object sender, EventArgs e)
         {
-            //valueList.
+            numeric.Visible = true;
         }
 
-        private void initImageList()
-        {
-
-        }
-
-        private void selectedItem(object sender, EventArgs e)
-        {
-            Console.Out.WriteLine(comboBox.SelectedText + " is selected");
-            //picture.Image = imageList[e.ItemIndex];
-        }
-
-        private void showList(object sender, EventArgs args)
+        public void showList(object sender, EventArgs eventArgs)
         {
             comboBox.Visible = checkBox.Checked;
         }
 
-        private void buttonAction(object sender, EventArgs args)
+        public override void SetDescription(string text)
         {
-            
+            throw new NotImplementedException();
         }
 
         public override void SetName(string text)
         {
-            containText = text;
+            throw new NotImplementedException();
         }
 
-        public override void SetDescription(string text)
+        private void initValueList()
         {
-            description = text;
-        }
-
-        public override void AddValueInList(string value)
-        {
-            valueList.Add(value);
+            valueComboBox.Add("Простой подгиб");
+            valueComboBox.Add("Московский шов");
+            valueComboBox.Add("Косая бейка");
         }
     }
 }

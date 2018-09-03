@@ -1,34 +1,52 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="Сalculator_for_tailoring_curtains.components.AbstractComponent">
-    <Position X="2.25" Y="1.75" Width="1.5" />
+    <Position X="0.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAEAAACAAAQAAAAAAAAAAAAQAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAEAAACAAAAAAAAAAAAAQgAQAAAAAA=</HashCode>
       <FileName>components\AbstractComponent.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Сalculator_for_tailoring_curtains.components.entity.ComponentWithList">
-    <Position X="0.5" Y="4" Width="1.5" />
+    <Position X="0.5" Y="7" Width="1.5" />
+    <Members>
+      <Method Name="buttonAction" Hidden="true" />
+      <Method Name="initImageList" Hidden="true" />
+      <Method Name="initValueList" Hidden="true" />
+      <Method Name="selectedItem" Hidden="true" />
+      <Method Name="showList" Hidden="true" />
+    </Members>
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>IAAAAABCAIAAAAIFJAACAAAQAAAoAAAAAAIAQIEQAAA=</HashCode>
+      <HashCode>IAAAAABCAIAAAAIVJAACAAAAAAAoAAAAAAoAQAEQAAA=</HashCode>
       <FileName>components\entity\ComponentWithList.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Сalculator_for_tailoring_curtains.OrderEntity">
     <Position X="5.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAA=</HashCode>
+      <HashCode>AAAEBAAAAAAAgAAgAAAAEAAAAAAAAAAAQAAAAAgAAAA=</HashCode>
       <FileName>components\entity\OrderEntity.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Сalculator_for_tailoring_curtains.CanvasEntity">
-    <Position X="0.5" Y="1.75" Width="1.5" />
+    <Position X="0.5" Y="0.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Properties" Collapsed="true" />
+    </Compartments>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAQAQAAAAABAAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <HashCode>AAIAAAAABAAAAAQERAAAAERAQAAAQAAAAIAAAACAAAA=</HashCode>
       <FileName>components\entity\CanvasEntity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Сalculator_for_tailoring_curtains.PropertyCanvas">
+    <Position X="0.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>components\PropertyCanvas.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

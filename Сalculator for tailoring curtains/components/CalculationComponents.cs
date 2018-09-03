@@ -22,7 +22,7 @@ namespace Сalculator_for_tailoring_curtains.components
         private void initComponents()
         {
             
-            using (XmlReader reader = XmlReader.Create(new StringReader(Resources.testData)))
+            /*using (XmlReader reader = XmlReader.Create(new StringReader(Resources.testData)))
             {
                 components = new List<AbstractComponent>();
                 AbstractComponent component = null;
@@ -39,6 +39,7 @@ namespace Сalculator_for_tailoring_curtains.components
                             case "Component":
                                 int type = Int32.Parse(reader.GetAttribute("type"));
                                 component = ComponentFactory.getComponent(type);
+                                
                                 break;
                             case "Name":
                                 component.SetName(reader.ReadElementContentAsString());
@@ -64,7 +65,7 @@ namespace Сalculator_for_tailoring_curtains.components
                         }
                     }
                 }
-            }
+            }*/
         }
 
         public List<AbstractComponent> Components

@@ -12,14 +12,23 @@ namespace Сalculator_for_tailoring_curtains.components
 {
     public partial class CanvasPanel : GroupBox
     {
-        public event EventHandler RemoveCanvas;
-        private string stWidthTitleLabel = "Ширина собранной";
-        private string stWidthExtendedTitleLabel = "Ширина тюля расправленного";
-        private string stHeightTitleLabel = "Высота без учёта припусков";
-        private string stCountOfSplited = "Количество частей";
+        private const string stWidthTitleLabel = "Ширина собранной";
+        //private const string stWidthExtendedTitleLabel = "Ширина тюля расправленного";
+        private const string stHeightTitleLabel = "Высота без учёта припусков";
+        private const string stCountOfSplitted = "Количество частей";
+        private CanvasEntity canvasEntity;
+
+        private int Distance = 4;
+
+        NumericUpDown numericWidth;
+        NumericUpDown numericExtendedWidth;
+        NumericUpDown numericHeight;
+        NumericUpDown numericCountOfSplitted;
         FlowLayoutPanel labelPanel;
         FlowLayoutPanel inputPanel;
-        private int Distance = 4;
+
+        public event EventHandler RemoveCanvas;
+
         public CanvasPanel()
         {
             InitializeComponent();
@@ -34,10 +43,34 @@ namespace Сalculator_for_tailoring_curtains.components
             Init();
         }
 
+        public void attachCanvasEntity()
+        {
+            canvasEntity = new CanvasEntity();
+            canvasEntity.Width = (int)numericWidth.Value;
+            canvasEntity.RealWidth = canvasEntity.Width;
+            canvasEntity.Height = (int)numericHeight.Value;
+            canvasEntity.RealHeight = canvasEntity.Height;
+            canvasEntity.Count = (int)numericCountOfSplitted.Value;
+            numericWidth.ValueChanged += (sender, args) => {
+                canvasEntity.Width = (int)numericWidth.Value;
+                canvasEntity.DataChangedEvent();
+                Console.Out.WriteLine(canvasEntity.ToString());
+            };
+            numericCountOfSplitted.ValueChanged += (sender, args) => {
+                canvasEntity.Count = (int)numericCountOfSplitted.Value;
+                numericWidth.Value = canvasEntity.RealWidth / canvasEntity.Count;
+                canvasEntity.DataChangedEvent();
+                Console.Out.WriteLine(canvasEntity.ToString());
+            };
+        }
+
+        private void CanvasNumericWidth_ValueChanged(object sender, EventArgs args)
+        {
+            canvasEntity.Width = (int)numericWidth.Value;
+        }
 
         public void Init()
         {
-
             Text = "panel";
             labelPanel = new FlowLayoutPanel();
             inputPanel = new FlowLayoutPanel();
@@ -56,13 +89,19 @@ namespace Сalculator_for_tailoring_curtains.components
             inputPanel.FlowDirection = FlowDirection.TopDown;
 
             labelPanel.Controls.Add(createLabel(stWidthTitleLabel));
-            labelPanel.Controls.Add(createLabel(stWidthExtendedTitleLabel));
+            //labelPanel.Controls.Add(createLabel(stWidthExtendedTitleLabel));
             labelPanel.Controls.Add(createLabel(stHeightTitleLabel));
-            labelPanel.Controls.Add(createLabel(stCountOfSplited));
-            for(int i = 0; i < 4; i++)
-            {
-                inputPanel.Controls.Add(createNumericUpDown());
-            }
+            labelPanel.Controls.Add(createLabel(stCountOfSplitted));
+
+            numericWidth = createNumericUpDown(250);
+            inputPanel.Controls.Add(numericWidth);
+            //numericWidthExtended = createNumericUpDown(250);
+            //inputPanel.Controls.Add(numericWidthExtended);
+            numericHeight = createNumericUpDown(260);
+            inputPanel.Controls.Add(numericHeight);
+            numericCountOfSplitted = createNumericUpDown(1);
+            //numericCountOfSplitted.ValueChanged += NumericCountOfSplitted_ValueChanged;
+            inputPanel.Controls.Add(numericCountOfSplitted);
 
             Button button = new Button();
             button.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
@@ -72,6 +111,11 @@ namespace Сalculator_for_tailoring_curtains.components
             inputPanel.Controls.Add(button);
             Controls.Add(labelPanel);
             Controls.Add(inputPanel);
+        }
+
+        private void NumericCountOfSplitted_ValueChanged(object sender, EventArgs e)
+        {
+            numericWidth.Value = numericWidth.Value / numericCountOfSplitted.Value;
         }
 
         protected void Button_RemoveCanvas(object obj, EventArgs eventArgs)
@@ -92,12 +136,38 @@ namespace Сalculator_for_tailoring_curtains.components
             return label;
         }
 
-        private NumericUpDown createNumericUpDown()
+        private NumericUpDown createNumericUpDown(decimal value)
         {
             NumericUpDown numeric = new NumericUpDown();
+            numeric.Minimum = 1;
+            numeric.Maximum = 400;
+            numeric.Value = value;
+            numeric.TextAlign = HorizontalAlignment.Center;
             numeric.Margin = new Padding(5);
+            numeric.KeyDown += Numeric_KeyDown;
+//            numeric.ValueChanged += PositiveValueHandler;
             return numeric;
         }
+
+        private void Numeric_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                ((NumericUpDown)sender).Parent.Focus();
+            }
+        }
+
+        private void Numeric_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        /*       private void PositiveValueHandler(object sender, EventArgs e)
+               {
+                   NumericUpDown numeric = (NumericUpDown)sender;
+                   Console.Out.WriteLine(numeric.Text + " " + numeric.Value);
+               }*/
 
         private void CanvasPanel_SizeChanged(object sender, EventArgs e)
         {

@@ -12,7 +12,7 @@ namespace Сalculator_for_tailoring_curtains
 
         private OrderEntity()
         {
-            listCanvas = new ArrayList<CanvasEntity>();
+            listCanvas = new List<CanvasEntity>();
         }
 
         public static OrderEntity Instance
