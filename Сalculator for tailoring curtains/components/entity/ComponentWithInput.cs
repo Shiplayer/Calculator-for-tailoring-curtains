@@ -20,6 +20,13 @@ namespace Сalculator_for_tailoring_curtains.components.entity
         {
         }
 
+        public ComponentWithInput(CanvasEntity entity, decimal min, decimal max, decimal step) : base(entity)
+        {
+            numericMin = min;
+            numericMax = max;
+            numericStep = step;
+        }
+
         public PropertyCanvas PropertyCanvas
         {
             get { return propertyCanvas; }
@@ -40,10 +47,10 @@ namespace Сalculator_for_tailoring_curtains.components.entity
             checkBox.CheckedChanged += CheckBox_ShowNumericComponent;
             
             numeric = new NumericUpDown();
-            numeric.Minimum = 0.1M;
-            numeric.Maximum = 10;
+            numeric.Minimum = numericMin;
+            numeric.Maximum = numericMax;
             numeric.DecimalPlaces = 2;
-            numeric.Increment = 0.1M;
+            numeric.Increment = numericStep;
             numeric.Visible = false;
 
             panel.addControl(checkBox);
@@ -64,6 +71,11 @@ namespace Сalculator_for_tailoring_curtains.components.entity
         public override void SetName(string text)
         {
             name = text;
+        }
+
+        public override IDisposable Subscribe(IObserver<CanvasEntityObserver> observer)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -56,7 +56,7 @@ namespace Сalculator_for_tailoring_curtains.components.entity
             descriptionHeader.Width = 400;
             descriptionHeader.TextAlign = HorizontalAlignment.Left;*/
             comboBox = new ComboBox();
-            comboBox.Text = "text";
+            comboBox.Text = "Выберите";
             comboBox.Visible = false;
 
             //listView.View = View.List;
@@ -122,6 +122,11 @@ namespace Сalculator_for_tailoring_curtains.components.entity
         public override void AddValueInList(string value)
         {
             valueList.Add(value);
+        }
+
+        public override IDisposable Subscribe(IObserver<CanvasEntityObserver> observer)
+        {
+            throw new NotImplementedException();
         }
     }
 }

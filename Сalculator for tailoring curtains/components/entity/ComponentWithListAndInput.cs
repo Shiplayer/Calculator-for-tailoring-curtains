@@ -17,11 +17,20 @@ namespace Сalculator_for_tailoring_curtains.components.entity
         private ComboBox comboBox;
         private NumericUpDown numeric;
         private PropertyCanvas propertyCanvas;
+        private List<IObserver<CanvasEntityObserver>> observers;
 
         public ComponentWithListAndInput(CanvasEntity entity) : base(entity)
         {
+            observers = new List<IObserver<CanvasEntityObserver>>();
             valueComboBox = new List<string>();
             //initValueList();
+        }
+
+        public ComponentWithListAndInput(CanvasEntity entity, decimal min, decimal max, decimal step) : base(entity)
+        {
+            numericMin = min;
+            numericMax = max;
+            numericStep = step;
         }
 
         public PropertyCanvas PropertyCanvas
@@ -113,6 +122,18 @@ namespace Сalculator_for_tailoring_curtains.components.entity
             valueComboBox.Add("Простой подгиб");
             valueComboBox.Add("Московский шов");
             valueComboBox.Add("Косая бейка");
+        }
+
+        public override IDisposable Subscribe(IObserver<CanvasEntityObserver> observer)
+        {
+            if (!observers.Contains(observer))
+            {
+                observers.Add(observer);
+                // Provide observer with existing data.
+//                foreach (var item in flights)
+//                    observer.OnNext(item);
+            }
+            return new Unsubscriber<CanvasEntityObserver>(observers, observer);
         }
     }
 }

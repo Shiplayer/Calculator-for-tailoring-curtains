@@ -3,9 +3,10 @@
   <Class Name="Сalculator_for_tailoring_curtains.components.AbstractComponent">
     <Position X="2.75" Y="4" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAABAAAAAAAAAEAAACAAAAAAAAAAAAAQgAQAAAAAA=</HashCode>
+      <HashCode>AAAAABAAAAAAAAAEAAACAAAAAAACAAAAAQgAQAAAAAA=</HashCode>
       <FileName>components\AbstractComponent.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="Сalculator_for_tailoring_curtains.components.entity.ComponentWithList">
     <Position X="0.5" Y="7" Width="1.5" />
@@ -20,7 +21,7 @@
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>IAAAAABCAIAAAAKVJAACAAAAAAAoAAAAAAoAQAEQAAA=</HashCode>
+      <HashCode>IAAAAABCAIAAAAKVJAACAAAAAAAqAAAAAAoAQAEQAAA=</HashCode>
       <FileName>components\entity\ComponentWithList.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -31,34 +32,16 @@
       <FileName>components\entity\OrderEntity.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Сalculator_for_tailoring_curtains.CanvasEntity">
+  <Class Name="Сalculator_for_tailoring_curtains.PropertyCanvas">
     <Position X="0.5" Y="0.75" Width="1.5" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
       <Compartment Name="Properties" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAIAAAAABAAAAAQERAAAAERAQAAAQAAAAIAAAACAAAA=</HashCode>
-      <FileName>components\entity\CanvasEntity.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Сalculator_for_tailoring_curtains.PropertyCanvas">
-    <Position X="0.5" Y="3.25" Width="1.5" />
-    <NestedTypes>
-      <Delegate Name="Сalculator_for_tailoring_curtains.PropertyCanvas.functionExecution" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>components\PropertyCanvas.cs</NewMemberFileName>
-        </TypeIdentifier>
-      </Delegate>
-      <Enum Name="Сalculator_for_tailoring_curtains.PropertyCanvas.TYPE_OF_PROPERTIES" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>components\PropertyCanvas.cs</NewMemberFileName>
-        </TypeIdentifier>
-      </Enum>
-    </NestedTypes>
-    <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAgAAgAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>components\PropertyCanvas.cs</FileName>
+      <NewMemberFileName>components\entity\CanvasEntity.cs</NewMemberFileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Сalculator_for_tailoring_curtains.components.entity.ComponentWithListAndInput">
@@ -72,7 +55,7 @@
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAIAAAAKUIAACAAAAAAAkAgAAEAoAQAEABAA=</HashCode>
+      <HashCode>AAAIAAAAAIAAAAKUIAACAAAAAAAmAgAAEAoAQAEABAA=</HashCode>
       <FileName>components\entity\ComponentWithListAndInput.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -85,7 +68,7 @@
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAIAAAACEIAACAAAAAAAEAgAAAAoAQAEAAgA=</HashCode>
+      <HashCode>AAAAAAAAAIAAAACEIAACAAAAAAAGAgAAAAoAQAEAAgA=</HashCode>
       <FileName>components\entity\ComponentWithInput.cs</FileName>
     </TypeIdentifier>
   </Class>

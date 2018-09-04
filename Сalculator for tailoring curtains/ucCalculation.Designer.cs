@@ -30,8 +30,6 @@
         {
             this.tlp_container = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.tlp_container.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -43,8 +41,6 @@
             this.tlp_container.ColumnCount = 1;
             this.tlp_container.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlp_container.Controls.Add(this.tableLayoutPanel1, 0, 0);
-            this.tlp_container.Controls.Add(this.button1, 0, 1);
-            this.tlp_container.Controls.Add(this.label1, 0, 2);
             this.tlp_container.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlp_container.Location = new System.Drawing.Point(0, 0);
             this.tlp_container.Name = "tlp_container";
@@ -67,27 +63,8 @@
             this.tableLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(537, 292);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(537, 321);
             this.tableLayoutPanel1.TabIndex = 1;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(465, 301);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(505, 327);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "label1";
             // 
             // ucCalculation
             // 
@@ -98,7 +75,6 @@
             this.Name = "ucCalculation";
             this.Size = new System.Drawing.Size(543, 347);
             this.tlp_container.ResumeLayout(false);
-            this.tlp_container.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -106,8 +82,6 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tlp_container;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Label label1;
     }
 }

@@ -46,11 +46,6 @@ namespace Сalculator_for_tailoring_curtains
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //ComponentWithList componentWithList = new ComponentWithList();
-            label1.Text = "RowCount = " + tableLayoutPanel1.RowCount + "; ColumnCount = " + tableLayoutPanel1.ColumnCount;
-            //tableLayoutPanel1.Controls.Add(componentWithList.getComponent(), 1, tableLayoutPanel1.RowCount++);
-        }
+        
     }
 }

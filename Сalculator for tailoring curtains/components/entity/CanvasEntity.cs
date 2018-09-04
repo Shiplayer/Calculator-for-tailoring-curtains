@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Сalculator_for_tailoring_curtains.components;
+using Сalculator_for_tailoring_curtains.components.entity;
 
 namespace Сalculator_for_tailoring_curtains
 {
-    public class CanvasEntity
+    public class CanvasEntity : IObserver<CanvasEntityObserver>
     {
         /*
          "width": Math.floor(def_Eave['width']),
@@ -20,6 +22,7 @@ namespace Сalculator_for_tailoring_curtains
         private int realHeight;
         private int realWidth;
         private int count;
+        private IDisposable cancellation;
         private List<PropertyCanvas> properties;
 
         public CanvasEntity()
@@ -74,9 +77,42 @@ namespace Сalculator_for_tailoring_curtains
                 "count = " + count + "\n}";
         }
 
+        public virtual void Subscribe(AbstractComponent provider)
+        {
+            cancellation = provider.Subscribe(this);
+        }
+
+        public void Unsubscribe()
+        {
+            cancellation.Dispose();
+        }
+
         public void addPropertyCanvas()
         {
             throw new System.NotImplementedException();
+        }
+
+        public void OnNext(CanvasEntityObserver value)
+        {
+            //width = value.Width;
+            if (realWidth != value.Width * value.Count)
+                realWidth = width * count;
+            if(realHeight != value.Height)
+            {
+                realHeight = value.Height;
+            }
+            width = realWidth / value.Count;
+            height = value.Height;
+        }
+
+        public void OnError(Exception error)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnCompleted()
+        {
+            throw new NotImplementedException();
         }
     }
 }

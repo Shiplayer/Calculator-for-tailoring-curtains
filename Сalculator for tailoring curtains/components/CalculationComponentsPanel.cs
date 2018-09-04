@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace Сalculator_for_tailoring_curtains.components
 {
-    class CalculationComponentsPanel : FlowLayoutPanel
+    public class CalculationComponentsPanel : FlowLayoutPanel
     {
         public CalculationComponentsPanel()
         {

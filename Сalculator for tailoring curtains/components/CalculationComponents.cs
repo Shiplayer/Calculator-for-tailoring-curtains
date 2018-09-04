@@ -12,7 +12,7 @@ using Сalculator_for_tailoring_curtains.Properties;
 
 namespace Сalculator_for_tailoring_curtains.components
 {
-    class CalculationComponents
+    public class CalculationComponents
     {
         private List<AbstractComponent> components;
         private CanvasEntity entity;
@@ -33,20 +33,63 @@ namespace Сalculator_for_tailoring_curtains.components
         private void initComponents()
         {
             components = new List<AbstractComponent>();
-            ComponentWithListAndInput listAndInput = new ComponentWithListAndInput(entity);
-            listAndInput.SetName("Боковины");
-            listAndInput.AddValueInList("Простой подгиб");
-            listAndInput.AddValueInList("Московский шов");
-            listAndInput.AddValueInList("Косая бейка");
-            listAndInput.PropertyCanvas = new PropertyCanvas((x, y) => { return y + x * 4; });
-            listAndInput.PropertyCanvas.TypeProperties = PropertyCanvas.TYPE_OF_PROPERTIES.WIDTH;
-            components.Add(listAndInput);
-            ComponentWithInput componentWithInput = new ComponentWithInput(entity);
-            componentWithInput.SetName("with input");
+            ComponentWithListAndInput component1 = new ComponentWithListAndInput(entity);
+            component1.SetName("Боковины");
+            component1.AddValueInList("Простой подгиб");
+            component1.AddValueInList("Московский шов");
+            component1.AddValueInList("Косая бейка");
+            component1.PropertyCanvas = new PropertyCanvas((x, y) => { return y + x * 4; });
+            component1.PropertyCanvas.TypeProperties = PropertyCanvas.TYPE_OF_PROPERTIES.WIDTH;
+            components.Add(component1);
+            ComponentWithInput component2 = new ComponentWithInput(entity, 5, 50, 1);
+            component2.SetName("Дополнительная  обработка боковины \"Ушки\"");
+            component2.PropertyCanvas = new PropertyCanvas((x, y) => { return y + x * 2; });
+            component2.PropertyCanvas.TypeProperties = PropertyCanvas.TYPE_OF_PROPERTIES.WIDTH;
             //PropertyCanvas property = new PropertyCanvas();
             //property.function = generateFunction();
             //componentWithInput.PropertyCanvas = new PropertyCanvas();
-            components.Add(componentWithInput);
+            components.Add(component2);
+
+            ComponentWithInput component3 = new ComponentWithInput(entity);
+            component3.SetName("Подгиб низа");
+            component3.PropertyCanvas = new PropertyCanvas((x, y) => { return y + x * 2; });
+            component3.PropertyCanvas.TypeProperties = PropertyCanvas.TYPE_OF_PROPERTIES.HEIGHT;
+
+            components.Add(component3);
+
+            ComponentWithListAndInput component4 = new ComponentWithListAndInput(entity);
+            component4.SetName("Обработка верха без шторной ленты");
+            component4.AddValueInList("Простой подгиб");
+            component4.AddValueInList("Московский шов");
+            component4.AddValueInList("Косая бейка");
+            component4.PropertyCanvas = new PropertyCanvas((x, y) => { return y + x * 2; });
+            component4.PropertyCanvas.TypeProperties = PropertyCanvas.TYPE_OF_PROPERTIES.HEIGHT;
+
+            components.Add(component4);
+
+            ComponentWithList component5 = new ComponentWithList(entity);
+            component5.SetName("Обработка верха шторной лентой");
+            component5.SetDescription("складка \"карандаш\"");
+            component5.AddValueInList("коэфф 1:2,0");
+            component5.AddValueInList("коэфф 1:2,5");
+            component5.AddValueInList("коэфф 1:3,0");
+
+            components.Add(component5);
+
+            ComponentWithInput component6 = new ComponentWithInput(entity);
+            component6.SetName("Дополнительная обработка \"Гребешок\"");
+            component6.PropertyCanvas = new PropertyCanvas((x, y) => { return y + x * 2; });
+
+            components.Add(component6);
+
+            ComponentWithList component7 = new ComponentWithList(entity);
+            component7.SetName("Обработка верха Люверсами");
+            component7.AddValueInList("внутренний d 35 мм");
+            component7.AddValueInList("внутренний d 40 мм");
+            component7.AddValueInList("внутренний d 50 мм");
+
+            components.Add(component7);
+
 
             /*using (XmlReader reader = XmlReader.Create(new StringReader(Resources.testData)))
             {
