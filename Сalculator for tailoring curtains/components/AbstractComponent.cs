@@ -13,10 +13,14 @@ namespace Сalculator_for_tailoring_curtains.components
         protected decimal numericMin = 0.1m;
         protected decimal numericMax = 10;
         protected decimal numericStep = 0.1m;
+        protected List<IObserver<CanvasEntityObserver>> listObservers;
+        protected List<PropertyCanvas> properties;
 
         protected CanvasEntity entity;
         protected AbstractComponent(CanvasEntity entity)
         {
+            listObservers = new List<IObserver<CanvasEntityObserver>>();
+            properties = new List<PropertyCanvas>();
             this.entity = entity;
         }
         public abstract CalculationComponentsPanel getComponent();

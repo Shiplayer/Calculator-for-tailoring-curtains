@@ -63,6 +63,9 @@
     <Compile Include="components\entity\ComponentWithList.cs" />
     <Compile Include="components\AbstractComponent.cs" />
     <Compile Include="components\entity\ComponentWithListAndInput.cs" />
+    <Compile Include="components\entity\TulleComponent.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="components\operation\ComponentOperation.cs" />
     <Compile Include="components\SubEntity.cs" />
     <Compile Include="components\Unsubscriber.cs" />
@@ -87,6 +90,18 @@
     </Compile>
     <Compile Include="ucCanvas.Designer.cs">
       <DependentUpon>ucCanvas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ucTulle.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucTulle.Designer.cs">
+      <DependentUpon>ucTulle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ucWindow.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucWindow.Designer.cs">
+      <DependentUpon>ucWindow.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="components\CalculationComponentsPanel.resx">
       <DependentUpon>CalculationComponentsPanel.cs</DependentUpon>
@@ -116,6 +131,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucCanvas.resx">
       <DependentUpon>ucCanvas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucTulle.resx">
+      <DependentUpon>ucTulle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucWindow.resx">
+      <DependentUpon>ucWindow.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

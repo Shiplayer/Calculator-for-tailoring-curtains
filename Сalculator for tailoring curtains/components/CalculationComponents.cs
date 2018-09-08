@@ -43,7 +43,7 @@ namespace Сalculator_for_tailoring_curtains.components
             components.Add(component1);
             ComponentWithInput component2 = new ComponentWithInput(entity, 5, 50, 1);
             component2.SetName("Дополнительная  обработка боковины \"Ушки\"");
-            component2.PropertyCanvas = new PropertyCanvas((x, y) => { return y + x * 2; });
+            component2.PropertyCanvas = new PropertyCanvas((x, y) => { Console.Out.WriteLine("result = " +  (y + x * 2)); return y + x * 2; });
             component2.PropertyCanvas.TypeProperties = PropertyCanvas.TYPE_OF_PROPERTIES.WIDTH;
             //PropertyCanvas property = new PropertyCanvas();
             //property.function = generateFunction();

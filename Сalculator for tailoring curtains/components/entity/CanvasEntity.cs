@@ -21,12 +21,15 @@ namespace Сalculator_for_tailoring_curtains
         private int height;
         private int realHeight;
         private int realWidth;
+        private int resultHeight;
+        private int resultWidth;
         private int count;
         private IDisposable cancellation;
         private List<PropertyCanvas> properties;
 
         public CanvasEntity()
         {
+            properties = new List<PropertyCanvas>();
         }
 
         public int Width
@@ -87,9 +90,36 @@ namespace Сalculator_for_tailoring_curtains
             cancellation.Dispose();
         }
 
-        public void addPropertyCanvas()
+        public void setPropertiesCanvas(List<PropertyCanvas> properties)
         {
-            throw new System.NotImplementedException();
+            this.properties = properties;
+            updateProperties();
+        }
+
+        public void addPropertyCanvas(PropertyCanvas property)
+        {
+            properties.Add(property);
+
+        }
+
+        public void updateProperties()
+        {
+            if(properties != null)
+            {
+                foreach (PropertyCanvas property in properties)
+                {
+                    if (!property.Updated)
+                    {
+                        if (property.TypeProperties == PropertyCanvas.TYPE_OF_PROPERTIES.HEIGHT)
+                            realHeight = property.apply(realHeight);
+                        else
+                            realWidth = property.apply(realWidth);
+                        Console.Out.WriteLine(property.apply(300));
+                        property.Updated = true;
+                        Console.Out.WriteLine("CanvasEntity: " + this.ToString());
+                    }
+                }
+            }
         }
 
         public void OnNext(CanvasEntityObserver value)
@@ -103,6 +133,7 @@ namespace Сalculator_for_tailoring_curtains
             }
             width = realWidth / value.Count;
             height = value.Height;
+            Console.Out.WriteLine(this.ToString());
         }
 
         public void OnError(Exception error)

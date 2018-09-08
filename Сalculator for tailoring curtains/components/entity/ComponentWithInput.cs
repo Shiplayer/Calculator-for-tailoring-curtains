@@ -30,7 +30,14 @@ namespace Сalculator_for_tailoring_curtains.components.entity
         public PropertyCanvas PropertyCanvas
         {
             get { return propertyCanvas; }
-            set { propertyCanvas = value; }
+            set { propertyCanvas = value;
+                properties.Add(value);
+            }
+        }
+
+        public void AddPropertyCanvas(PropertyCanvas property)
+        {
+            properties.Add(property);
         }
 
         public override void AddValueInList(string value)
@@ -52,15 +59,40 @@ namespace Сalculator_for_tailoring_curtains.components.entity
             numeric.DecimalPlaces = 2;
             numeric.Increment = numericStep;
             numeric.Visible = false;
+            numeric.ValueChanged += Numeric_ValueChanged;
 
             panel.addControl(checkBox);
             panel.addControl(numeric);
             return panel;
         }
 
+        private void Numeric_ValueChanged(object sender, EventArgs e)
+        {
+            Console.Out.WriteLine(entity.ToString());
+            if(properties.Count > 0)
+            {
+                Console.Out.WriteLine("valueChanged");
+                properties[0].updateValue(numeric.Value);
+                entity.updateProperties();
+            }
+        }
+
         private void CheckBox_ShowNumericComponent(object sender, EventArgs e)
         {
             numeric.Visible = checkBox.Checked;
+            if (checkBox.Checked && propertyCanvas != null)
+            {
+                properties[0].updateValue(numeric.Value);
+                entity.setPropertiesCanvas(properties);
+            }
+            else if (!checkBox.Checked && propertyCanvas != null)
+            {
+                entity.setPropertiesCanvas(null);
+            }
+            /*foreach(IObserver<CanvasEntityObserver> observer in listObservers)
+            {
+
+            }*/
         }
 
         public override void SetDescription(string text)
@@ -75,7 +107,11 @@ namespace Сalculator_for_tailoring_curtains.components.entity
 
         public override IDisposable Subscribe(IObserver<CanvasEntityObserver> observer)
         {
-            throw new NotImplementedException();
+            if (!listObservers.Contains(observer))
+            {
+                listObservers.Add(observer);
+            }
+            return new Unsubscriber<CanvasEntityObserver>(listObservers, observer);
         }
     }
 }

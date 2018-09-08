@@ -2,8 +2,12 @@
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="Сalculator_for_tailoring_curtains.components.AbstractComponent">
     <Position X="2.75" Y="4" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Properties" Collapsed="true" />
+    </Compartments>
     <TypeIdentifier>
-      <HashCode>AAAAABAAAAAAAAAEAAACAAAAAAACAAAAAQgAQAAAAAA=</HashCode>
+      <HashCode>AAIIABAAAAAAAAAEAEACAAEAAAACAAAAAQgAQAAAAAA=</HashCode>
       <FileName>components\AbstractComponent.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -19,6 +23,7 @@
     </Members>
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Properties" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
       <HashCode>IAAAAABCAIAAAAKVJAACAAAAAAAqAAAAAAoAQAEQAAA=</HashCode>
@@ -38,8 +43,20 @@
       <Compartment Name="Fields" Collapsed="true" />
       <Compartment Name="Properties" Collapsed="true" />
     </Compartments>
+    <NestedTypes>
+      <Enum Name="Сalculator_for_tailoring_curtains.PropertyCanvas.TYPE_OF_PROPERTIES" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>components\PropertyCanvas.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Delegate Name="Сalculator_for_tailoring_curtains.PropertyCanvas.functionExecution" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>components\PropertyCanvas.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAgAAgAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAEAAAAAAAAAgAAgAAAAAAAAAACCAAQAAAAEAAAAA=</HashCode>
       <FileName>components\PropertyCanvas.cs</FileName>
       <NewMemberFileName>components\entity\CanvasEntity.cs</NewMemberFileName>
     </TypeIdentifier>
@@ -53,6 +70,7 @@
     </Members>
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Properties" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
       <HashCode>AAAIAAAAAIAAAAKUIAACAAAAAAAmAgAAEAoAQAEABAA=</HashCode>
@@ -66,10 +84,31 @@
     </Members>
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Properties" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAIAAAACEIAACAAAAAAAGAgAAAAoAQAEAAgA=</HashCode>
+      <HashCode>IAAAAAAAAIAAAACEIAACAAAEAAAGAgAAAAoAQAEAAgA=</HashCode>
       <FileName>components\entity\ComponentWithInput.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Сalculator_for_tailoring_curtains.CanvasEntity">
+    <Position X="6.5" Y="4" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Properties" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AEIAAAQABACAAAYERAAAAERIQAACQAAgQIAAAACAAgA=</HashCode>
+      <FileName>components\entity\CanvasEntity.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Сalculator_for_tailoring_curtains.components.entity.CanvasEntityObserver">
+    <Position X="9.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAQARAAAAEQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>components\entity\CanvasEntityObserver.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
