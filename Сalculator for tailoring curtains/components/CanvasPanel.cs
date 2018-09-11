@@ -21,7 +21,6 @@ namespace Сalculator_for_tailoring_curtains.components
         private int Distance = 4;
 
         NumericUpDown numericWidth;
-        NumericUpDown numericExtendedWidth;
         NumericUpDown numericHeight;
         NumericUpDown numericCountOfSplitted;
         FlowLayoutPanel labelPanel;

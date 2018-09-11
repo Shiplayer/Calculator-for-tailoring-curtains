@@ -80,5 +80,10 @@ namespace Сalculator_for_tailoring_curtains
             splitContainer1.SplitterDistance = splitContainer1.Height - btn_next.Height - btn_next.Margin.Top - btn_next.Margin.Bottom - 5;
             //splitContainer1.Width = Width - splitContainer1.Location.X * 2;
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            mainPanel.Visible = false;
+        }
     }
 }

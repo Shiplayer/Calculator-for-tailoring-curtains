@@ -14,7 +14,6 @@ namespace Сalculator_for_tailoring_curtains.components.entity
         private string description;
         private bool checkboxDefaultValue = false;
         private NumericUpDown numeric;
-        private PropertyCanvas propertyCanvas;
 
         public ComponentWithInput(CanvasEntity entity) : base(entity)
         {
@@ -27,20 +26,12 @@ namespace Сalculator_for_tailoring_curtains.components.entity
             numericStep = step;
         }
 
-        public PropertyCanvas PropertyCanvas
-        {
-            get { return propertyCanvas; }
-            set { propertyCanvas = value;
-                properties.Add(value);
-            }
-        }
-
         public void AddPropertyCanvas(PropertyCanvas property)
         {
             properties.Add(property);
         }
 
-        public override void AddValueInList(string value)
+        public override void AddItemInList(string value)
         {
             throw new NotImplementedException();
         }
@@ -72,22 +63,30 @@ namespace Сalculator_for_tailoring_curtains.components.entity
             if(properties.Count > 0)
             {
                 Console.Out.WriteLine("valueChanged");
+                entity.removeProperty(properties[0]);
                 properties[0].updateValue(numeric.Value);
-                entity.updateProperties();
+                entity.addPropertyCanvas(properties[0]);
             }
         }
 
         private void CheckBox_ShowNumericComponent(object sender, EventArgs e)
         {
             numeric.Visible = checkBox.Checked;
-            if (checkBox.Checked && propertyCanvas != null)
+            if (checkBox.Checked && properties.Count > 0)
             {
                 properties[0].updateValue(numeric.Value);
-                entity.setPropertiesCanvas(properties);
+                if (!entity.containsPropertyCanvas(properties[0]))
+                {
+                    foreach (PropertyCanvas p in properties)
+                        entity.addPropertyCanvas(p);
+                }
+                else
+                    entity.updateProperties();
             }
-            else if (!checkBox.Checked && propertyCanvas != null)
+            else if (!checkBox.Checked && properties.Count > 0)
             {
-                entity.setPropertiesCanvas(null);
+                for(int i = 0; i < properties.Count; i++)
+                    entity.removeProperty(properties[i]);
             }
             /*foreach(IObserver<CanvasEntityObserver> observer in listObservers)
             {
@@ -103,15 +102,6 @@ namespace Сalculator_for_tailoring_curtains.components.entity
         public override void SetName(string text)
         {
             name = text;
-        }
-
-        public override IDisposable Subscribe(IObserver<CanvasEntityObserver> observer)
-        {
-            if (!listObservers.Contains(observer))
-            {
-                listObservers.Add(observer);
-            }
-            return new Unsubscriber<CanvasEntityObserver>(listObservers, observer);
         }
     }
 }

@@ -16,6 +16,7 @@ namespace Сalculator_for_tailoring_curtains
     {
         private static int n = 0;
         private static ucCalculation _instance;
+        private ucCalculation instance;
 
         public static ucCalculation Instance
         {

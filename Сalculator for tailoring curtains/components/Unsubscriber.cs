@@ -6,14 +6,21 @@ using System.Threading.Tasks;
 
 namespace Сalculator_for_tailoring_curtains.components
 {
-    class Unsubscriber<CanvasEntityObserver> : IDisposable
+    class Unsubscriber<CanvasEntity> : IDisposable
     {
-        private List<IObserver<CanvasEntityObserver>> _observers;
-        private IObserver<CanvasEntityObserver> _observer;
+        private List<IObserver<CanvasEntity>> _observers;
+        private IObserver<CanvasEntity> _observer;
 
-        internal Unsubscriber(List<IObserver<CanvasEntityObserver>> observers, IObserver<CanvasEntityObserver> observer)
+        internal Unsubscriber(List<IObserver<CanvasEntity>> observers, IObserver<CanvasEntity> observer)
         {
             this._observers = observers;
+            this._observer = observer;
+        }
+
+        internal Unsubscriber(IObserver<CanvasEntity> observers, IObserver<CanvasEntity> observer)
+        {
+            this._observers = new List<IObserver<CanvasEntity>>();
+            this._observers.Add(observers);
             this._observer = observer;
         }
 

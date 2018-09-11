@@ -7,7 +7,7 @@ using Сalculator_for_tailoring_curtains.components.entity;
 
 namespace Сalculator_for_tailoring_curtains
 {
-    public class CanvasEntity : IObserver<CanvasEntityObserver>
+    public class CanvasEntity : IObservable<CanvasEntity>
     {
         /*
          "width": Math.floor(def_Eave['width']),
@@ -17,40 +17,46 @@ namespace Сalculator_for_tailoring_curtains
 	"height": 120,
 	"heightFull": 125,
          */
-        private int width;
-        private int height;
-        private int realHeight;
-        private int realWidth;
-        private int resultHeight;
-        private int resultWidth;
+        private decimal width;
+        private decimal height;
+        private decimal realHeight;
+        private decimal realWidth;
         private int count;
         private IDisposable cancellation;
+        private IObserver<CanvasEntity> observer;
         private List<PropertyCanvas> properties;
+
 
         public CanvasEntity()
         {
             properties = new List<PropertyCanvas>();
         }
 
-        public int Width
+        public decimal Width
         {
             get { return width; }
-            set { width = value; }
+            set { width = value;
+                realWidth = value;
+                updateProperties();
+            }
         }
 
-        public int Height
+        public decimal Height
         {
             get { return height; }
-            set { height = value; }
+            set { height = value;
+                realHeight = value;
+                updateProperties();
+            }
         }
 
-        public int RealHeight
+        public decimal RealHeight
         {
             get { return realHeight; }
             set { realHeight = value; }
         }
 
-        public int RealWidth
+        public decimal RealWidth
         {
             get { return realWidth; }
             set { realWidth = value; }
@@ -80,11 +86,6 @@ namespace Сalculator_for_tailoring_curtains
                 "count = " + count + "\n}";
         }
 
-        public virtual void Subscribe(AbstractComponent provider)
-        {
-            cancellation = provider.Subscribe(this);
-        }
-
         public void Unsubscribe()
         {
             cancellation.Dispose();
@@ -96,54 +97,68 @@ namespace Сalculator_for_tailoring_curtains
             updateProperties();
         }
 
+        public bool containsPropertyCanvas(PropertyCanvas property)
+        {
+            return properties.Contains(property);
+        }
+
         public void addPropertyCanvas(PropertyCanvas property)
         {
             properties.Add(property);
+            updateProperties();
+        }
 
+        public void removeProperty(PropertyCanvas property) 
+        {
+            if (properties.Contains(property))
+            {
+
+                    if (property.TypeProperties == PropertyCanvas.TYPE_OF_PROPERTIES.HEIGHT)
+                        realHeight += height - property.apply(height);
+                    else
+                        realWidth += width - property.apply(width);
+                    if(observer != null)
+                    observer.OnNext(this);
+                
+                properties.Remove(property);
+            }
         }
 
         public void updateProperties()
         {
             if(properties != null)
             {
+                realHeight = height;
+                realWidth = width;
                 foreach (PropertyCanvas property in properties)
                 {
-                    if (!property.Updated)
-                    {
-                        if (property.TypeProperties == PropertyCanvas.TYPE_OF_PROPERTIES.HEIGHT)
-                            realHeight = property.apply(realHeight);
-                        else
-                            realWidth = property.apply(realWidth);
-                        Console.Out.WriteLine(property.apply(300));
-                        property.Updated = true;
-                        Console.Out.WriteLine("CanvasEntity: " + this.ToString());
-                    }
+                    ExecuteProperty(property);
                 }
+                if (observer != null) 
+                    observer.OnNext(this);
             }
         }
 
-        public void OnNext(CanvasEntityObserver value)
+        public void ExecuteProperty(PropertyCanvas property)
         {
-            //width = value.Width;
-            if (realWidth != value.Width * value.Count)
-                realWidth = width * count;
-            if(realHeight != value.Height)
+            
+                if (property.TypeProperties == PropertyCanvas.TYPE_OF_PROPERTIES.HEIGHT)
+                    realHeight += property.apply(height) - height;
+                else
+                    realWidth += property.apply(width) - width;
+                Console.Out.WriteLine(property.apply(width));
+                Console.Out.WriteLine("CanvasEntity: " + this.ToString());
+        }
+
+        public IDisposable Subscribe(IObserver<CanvasEntity> observer)
+        {
+            if(this.observer != observer)
             {
-                realHeight = value.Height;
+                this.observer = observer;
+                if(observer != null)
+                    observer.OnNext(this);
             }
-            width = realWidth / value.Count;
-            height = value.Height;
-            Console.Out.WriteLine(this.ToString());
-        }
-
-        public void OnError(Exception error)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void OnCompleted()
-        {
-            throw new NotImplementedException();
+            return new Unsubscriber<CanvasEntity>(this.observer, observer);
         }
     }
 }

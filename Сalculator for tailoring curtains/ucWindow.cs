@@ -134,10 +134,10 @@ namespace Сalculator_for_tailoring_curtains
 
         private void tableLayoutPanel1_CellPaint(object sender, TableLayoutCellPaintEventArgs e)
         {
-            if ((e.Column + e.Row) % 2 == 1)
+            /*if ((e.Column + e.Row) % 2 == 1)
                 e.Graphics.FillRectangle(Brushes.Black, e.CellBounds);
             else
-                e.Graphics.FillRectangle(Brushes.White, e.CellBounds);
+                e.Graphics.FillRectangle(Brushes.White, e.CellBounds);*/
         }
     }
 }

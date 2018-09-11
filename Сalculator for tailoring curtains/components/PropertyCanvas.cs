@@ -8,8 +8,8 @@ namespace Сalculator_for_tailoring_curtains
 
     public class PropertyCanvas
     {
-        public enum TYPE_OF_PROPERTIES { WIDTH, HEIGHT }
-        public delegate int functionExecution(int x, int y);
+        public enum TYPE_OF_PROPERTIES { WIDTH, HEIGHT, BOTH }
+        public delegate decimal functionExecution(decimal x, decimal y);
         public functionExecution function;
         private decimal value;
 
@@ -18,9 +18,9 @@ namespace Сalculator_for_tailoring_curtains
             this.function = function;
         }
 
-        public int apply(int x)
+        public decimal apply(decimal x)
         {
-            return function((int)value, x);
+            return function(value, x);
         }
 
         public void updateValue(decimal value)

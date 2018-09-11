@@ -14,27 +14,30 @@ namespace Сalculator_for_tailoring_curtains.components.entity
         private string containText;
         private string description;
         private bool checkboxDefaultValue = false;
-        private List<string> valueList;
-        private List<Image> imageList;
+        private Dictionary<string, decimal> keyValuePairs;
+        private List<string> itemList;
+        private List<decimal> valueList;
         private Button button;
         private ComboBox comboBox;
         private PictureBox picture;
         private CheckBox checkBox;
-        private PropertyCanvas propertyCanvas;
 
         public ComponentWithList(CanvasEntity entity) : base(entity)
         {
             containText = "test value" + count++;
-            valueList = new List<string>();
-            initValueList();
-            imageList = new List<Image>();
-            initImageList();
+            keyValuePairs = new Dictionary<string, decimal>();
+            itemList = new List<string>();
+            valueList = new List<decimal>();
         }
 
-        public PropertyCanvas PropertyCanvas
+        public void AddPropertyCanvas(PropertyCanvas property)
         {
-            get { return propertyCanvas; }
-            set { propertyCanvas = value; }
+            properties.Add(property);
+        }
+
+        public void AddKeyValue(string key, decimal value)
+        {
+            keyValuePairs.Add(key, value);
         }
 
         public override CalculationComponentsPanel getComponent()
@@ -62,46 +65,45 @@ namespace Сalculator_for_tailoring_curtains.components.entity
             //listView.View = View.List;
             //listView.Columns.Add(imageHeader);
             //listView.Columns.Add(descriptionHeader);
+            foreach (string item in keyValuePairs.Keys.ToList<string>())
+            {
+                itemList.Add(item);
+            }
 
-            foreach(string text in valueList)
+            foreach(string text in itemList)
                 comboBox.Items.Add(text);
-            if(imageList.Count > 1)
-                comboBox.SelectedValueChanged += selectedItem;
+            comboBox.SelectedValueChanged += selectedItem;
             
             panel.addControl(checkBox);
             panel.addControl(button);
             panel.addControl(comboBox);
-            if (imageList.Count == 1)
-            {
-                picture = new PictureBox();
-                picture.Size = new Size(70, 70);
 
-                picture.Image = imageList[0];
-                picture.SizeMode = PictureBoxSizeMode.Zoom;
-                panel.addControl(picture);
-            }
             return panel;
-        }
-
-        private void initValueList()
-        {
-            //valueList.
-        }
-
-        private void initImageList()
-        {
-
         }
 
         private void selectedItem(object sender, EventArgs e)
         {
-            Console.Out.WriteLine(comboBox.SelectedText + " is selected");
+            Console.Out.WriteLine(comboBox.SelectedText + " is selected (index = " + comboBox.SelectedIndex + ")");
+            if (keyValuePairs.ContainsKey((string)comboBox.SelectedItem)) {
+                properties[0].updateValue(keyValuePairs[(string)comboBox.SelectedItem]);
+                entity.updateProperties();
+            }
             //picture.Image = imageList[e.ItemIndex];
         }
 
         private void showList(object sender, EventArgs args)
         {
             comboBox.Visible = checkBox.Checked;
+            if(checkBox.Checked)
+                foreach(PropertyCanvas p in properties)
+                {
+                    entity.addPropertyCanvas(p);
+                }
+            else
+                foreach(PropertyCanvas p in properties)
+                {
+                    entity.removeProperty(p);
+                }
         }
 
         private void buttonAction(object sender, EventArgs args)
@@ -119,14 +121,14 @@ namespace Сalculator_for_tailoring_curtains.components.entity
             description = text;
         }
 
-        public override void AddValueInList(string value)
+        public override void AddItemInList(string value)
         {
-            valueList.Add(value);
+            itemList.Add(value);
         }
 
-        public override IDisposable Subscribe(IObserver<CanvasEntityObserver> observer)
+        public void AddValueInList(decimal value)
         {
-            throw new NotImplementedException();
+            valueList.Add(value);
         }
     }
 }
