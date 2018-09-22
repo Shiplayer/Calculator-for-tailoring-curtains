@@ -33,9 +33,9 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.btn_prev = new System.Windows.Forms.Button();
             this.mainPanel = new System.Windows.Forms.Panel();
-            this.mainPanelContent = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
+            this.mainPanelContent = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -55,7 +55,7 @@
             this.panel1.Location = new System.Drawing.Point(5, 5);
             this.panel1.Margin = new System.Windows.Forms.Padding(5);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(844, 471);
+            this.panel1.Size = new System.Drawing.Size(1053, 471);
             this.panel1.TabIndex = 1;
             this.panel1.Visible = false;
             // 
@@ -63,12 +63,13 @@
             // 
             this.btn_next.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_next.AutoSize = true;
-            this.btn_next.Location = new System.Drawing.Point(776, 3);
+            this.btn_next.Location = new System.Drawing.Point(985, 3);
             this.btn_next.Name = "btn_next";
             this.btn_next.Size = new System.Drawing.Size(75, 30);
             this.btn_next.TabIndex = 2;
             this.btn_next.Text = "Далее";
             this.btn_next.UseVisualStyleBackColor = true;
+            this.btn_next.Visible = false;
             this.btn_next.Click += new System.EventHandler(this.btn_next_Click);
             // 
             // splitContainer1
@@ -88,7 +89,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.btn_prev);
             this.splitContainer1.Panel2.Controls.Add(this.btn_next);
-            this.splitContainer1.Size = new System.Drawing.Size(854, 529);
+            this.splitContainer1.Size = new System.Drawing.Size(1063, 529);
             this.splitContainer1.SplitterDistance = 481;
             this.splitContainer1.TabIndex = 3;
             // 
@@ -110,18 +111,9 @@
             this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mainPanel.Location = new System.Drawing.Point(0, 0);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(878, 553);
+            this.mainPanel.Size = new System.Drawing.Size(1087, 553);
             this.mainPanel.TabIndex = 4;
             this.mainPanel.Visible = false;
-            // 
-            // mainPanelContent
-            // 
-            this.mainPanelContent.AutoSize = true;
-            this.mainPanelContent.Dock = System.Windows.Forms.DockStyle.Top;
-            this.mainPanelContent.Location = new System.Drawing.Point(0, 0);
-            this.mainPanelContent.Name = "mainPanelContent";
-            this.mainPanelContent.Size = new System.Drawing.Size(878, 0);
-            this.mainPanelContent.TabIndex = 0;
             // 
             // panel3
             // 
@@ -129,14 +121,14 @@
             this.panel3.Controls.Add(this.button1);
             this.panel3.Location = new System.Drawing.Point(3, 513);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(872, 37);
+            this.panel3.Size = new System.Drawing.Size(1081, 37);
             this.panel3.TabIndex = 1;
             // 
             // button1
             // 
             this.button1.AutoSize = true;
             this.button1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.button1.Location = new System.Drawing.Point(797, 0);
+            this.button1.Location = new System.Drawing.Point(1006, 0);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 37);
             this.button1.TabIndex = 0;
@@ -144,11 +136,20 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // mainPanelContent
+            // 
+            this.mainPanelContent.AutoSize = true;
+            this.mainPanelContent.Dock = System.Windows.Forms.DockStyle.Top;
+            this.mainPanelContent.Location = new System.Drawing.Point(0, 0);
+            this.mainPanelContent.Name = "mainPanelContent";
+            this.mainPanelContent.Size = new System.Drawing.Size(1087, 0);
+            this.mainPanelContent.TabIndex = 0;
+            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(878, 553);
+            this.ClientSize = new System.Drawing.Size(1087, 553);
             this.Controls.Add(this.mainPanel);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));

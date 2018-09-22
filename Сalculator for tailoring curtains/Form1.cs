@@ -7,12 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Сalculator_for_tailoring_curtains.components;
 
 namespace Сalculator_for_tailoring_curtains
 {
     public partial class Form1 : Form
     {
         private List<UserControl> userControls;
+        private CalculationComponents target;
         private int index = 0;
         public Form1()
         {
@@ -81,9 +83,13 @@ namespace Сalculator_for_tailoring_curtains
             //splitContainer1.Width = Width - splitContainer1.Location.X * 2;
         }
 
+        public CalculationComponents SetSelected { set { target = value; } }
+
         private void button1_Click(object sender, EventArgs e)
         {
+            target.getControlComponent().Visible = false;
             mainPanel.Visible = false;
+            ucWindow.Instance.updateTulle();
         }
     }
 }

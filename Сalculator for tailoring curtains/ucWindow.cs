@@ -105,7 +105,7 @@ namespace Сalculator_for_tailoring_curtains
                     tulle.Text = "Тюль " + tulles.Count;
                     if (tableLayoutPanel1.RowCount < tulles.Count)
                         tableLayoutPanel1.RowCount++;
-                    tableLayoutPanel1.Controls.Add(tulle, 0, 1 + tulles.Count);
+                    tableLayoutPanel1.Controls.Add(tulle, 0, 2 + tulles.Count);
                     oldNumTulle++;
                 }
             }
@@ -132,12 +132,55 @@ namespace Сalculator_for_tailoring_curtains
             }
         }
 
+        public void updateTulle()
+        {
+            foreach(ucTulle tulle in tulles)
+            {
+                tulle.updateSize();
+            }
+        }
+
         private void tableLayoutPanel1_CellPaint(object sender, TableLayoutCellPaintEventArgs e)
         {
             /*if ((e.Column + e.Row) % 2 == 1)
                 e.Graphics.FillRectangle(Brushes.Black, e.CellBounds);
             else
                 e.Graphics.FillRectangle(Brushes.White, e.CellBounds);*/
+        }
+
+        private void textBox2_Leave(object sender, EventArgs e)
+        {
+            OrderEntity.Instance.GetClient().PhoneNamber = textBox2.Text;
+        }
+
+        private void textBox1_Leave(object sender, EventArgs e)
+        {
+            OrderEntity.Instance.GetClient().Name = textBox1.Text;
+        }
+
+        private void textBox2_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyValue >= '0' && e.KeyValue <= '9' )
+            {
+                e.Handled = true;
+            }
+            else
+            {
+                e.Handled = false;
+            }
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

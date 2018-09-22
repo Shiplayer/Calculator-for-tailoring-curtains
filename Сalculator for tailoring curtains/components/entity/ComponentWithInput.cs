@@ -17,6 +17,9 @@ namespace Сalculator_for_tailoring_curtains.components.entity
 
         public ComponentWithInput(CanvasEntity entity) : base(entity)
         {
+            numericMin = 1;
+            numericStep = 0.5m;
+            numericMax = 50;
         }
 
         public ComponentWithInput(CanvasEntity entity, decimal min, decimal max, decimal step) : base(entity)
@@ -28,6 +31,7 @@ namespace Сalculator_for_tailoring_curtains.components.entity
 
         public void AddPropertyCanvas(PropertyCanvas property)
         {
+            property.name = name;
             properties.Add(property);
         }
 
@@ -47,7 +51,7 @@ namespace Сalculator_for_tailoring_curtains.components.entity
             numeric = new NumericUpDown();
             numeric.Minimum = numericMin;
             numeric.Maximum = numericMax;
-            numeric.DecimalPlaces = 2;
+            numeric.DecimalPlaces = 1;
             numeric.Increment = numericStep;
             numeric.Visible = false;
             numeric.ValueChanged += Numeric_ValueChanged;
@@ -102,6 +106,11 @@ namespace Сalculator_for_tailoring_curtains.components.entity
         public override void SetName(string text)
         {
             name = text;
+        }
+
+        public override void AddItemInList(string item, decimal value, decimal numMin, decimal numMax, decimal numStep)
+        {
+            throw new NotImplementedException();
         }
     }
 }

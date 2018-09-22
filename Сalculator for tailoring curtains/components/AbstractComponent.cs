@@ -10,9 +10,9 @@ namespace Сalculator_for_tailoring_curtains.components
     public enum TYPE_OF_COMPONENTS { INPUT, LIST, INPUT_AND_LIST}
     public abstract class AbstractComponent
     {
-        protected decimal numericMin = 0.1m;
+        protected decimal numericMin = 1m;
         protected decimal numericMax = 10;
-        protected decimal numericStep = 0.1m;
+        protected decimal numericStep = 1m;
         protected List<IObserver<CanvasEntity>> listObservers;
         protected List<PropertyCanvas> properties;
 
@@ -27,6 +27,7 @@ namespace Сalculator_for_tailoring_curtains.components
         public abstract void SetName(string text);
         public abstract void SetDescription(string text);
         public abstract void AddItemInList(string value);
+        public abstract void AddItemInList(string item, decimal value, decimal numMin, decimal numMax, decimal numStep);
 
         public TYPE_OF_COMPONENTS Type { get; set; }
     }

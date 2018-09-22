@@ -18,6 +18,7 @@ namespace Сalculator_for_tailoring_curtains.components.entity
         private bool checkboxDefaultValue = false;
         private ComboBox comboBox;
         private NumericUpDown numeric;
+        private bool isFirstShowed = false;
 
         public ComponentWithListAndInput(CanvasEntity entity) : base(entity)
         {
@@ -41,6 +42,7 @@ namespace Сalculator_for_tailoring_curtains.components.entity
 
         public void AddPropertyCanvas(PropertyCanvas property)
         {
+            property.name = name;
             properties.Add(property);
         }
 
@@ -71,13 +73,14 @@ namespace Сalculator_for_tailoring_curtains.components.entity
             comboBox.Text = "Выберите";
             comboBox.Visible = false;
             comboBox.SelectedValueChanged += ComboBox_SelectedValueChanged;
-            comboBox.SelectedValueChanged += ComboBox_SelectedItem;
+            comboBox.VisibleChanged += visibleChangedComboBox;
+            //comboBox.DropDown += ComboBox_DropDown;
 
             numeric = new NumericUpDown();
-            numeric.DecimalPlaces = 2;
+            numeric.DecimalPlaces = 1;
             numeric.Visible = false;
-            numeric.Minimum = 0.1M;
-            numeric.Increment = 0.1M;
+            numeric.Minimum = 1;
+            numeric.Increment = 0.5M;
             numeric.Maximum = 10;
             numeric.ValueChanged += Numeric_ValueChanged;
 
@@ -91,6 +94,7 @@ namespace Сalculator_for_tailoring_curtains.components.entity
             }
             foreach (string text in itemList)
                 comboBox.Items.Add(text);
+            //comboBox.Width = DropDownWidth() + 15;
 
             panel.addControl(checkBox);
             panel.addControl(comboBox);
@@ -107,6 +111,52 @@ namespace Сalculator_for_tailoring_curtains.components.entity
             return panel;
         }
 
+        private void ComboBox_DropDown(object sender, EventArgs e)
+        {
+            
+        }
+
+        private int DropDownWidth()
+        {
+            int maxWidth = 0, temp = 0;
+            foreach (var obj in comboBox.Items)
+            {
+                temp = TextRenderer.MeasureText(obj.ToString(), comboBox.Font).Width;
+                if (temp > maxWidth)
+                {
+                    maxWidth = temp;
+                }
+            }
+            return maxWidth;
+        }
+
+        private void visibleChangedComboBox(object sender, EventArgs e)
+        {
+            if (!comboBox.Visible)
+            {
+                numeric.Visible = false;
+                foreach(PropertyCanvas p in properties)
+                {
+                    p.selected = null;
+                    entity.removeProperty(p);   
+                }
+            } else
+            {
+                if(comboBox.SelectedItem != null)
+                {
+                    numeric.Visible = true;
+                    foreach (PropertyCanvas p in properties)
+                    {
+                        properties[0].updateValue(numeric.Value);
+                        properties[0].selected = (string)comboBox.SelectedItem;
+                        if (!entity.containsPropertyCanvas(p))
+                            entity.addPropertyCanvas(p);
+                    }
+                    entity.updateProperties();
+                }
+            }
+        }
+
         private void Numeric_ValueChanged(object sender, EventArgs e)
         {
             properties[0].updateValue(numeric.Value);
@@ -116,6 +166,18 @@ namespace Сalculator_for_tailoring_curtains.components.entity
         private void ComboBox_SelectedValueChanged(object sender, EventArgs e)
         {
             numeric.Visible = true;
+            if (!isFirstShowed)
+            {
+                isFirstShowed = true;
+                foreach (PropertyCanvas p in properties)
+                {
+                    p.selected = (string)comboBox.SelectedItem;
+                    properties[0].updateValue(numeric.Value);
+                    if (!entity.containsPropertyCanvas(p))
+                        entity.addPropertyCanvas(p);
+                }
+            }
+
             if (keyValuePairs.ContainsKey((string)comboBox.SelectedItem))
             {
                 properties[0].updateValue(keyValuePairs[(string)comboBox.SelectedItem]);
@@ -123,25 +185,12 @@ namespace Сalculator_for_tailoring_curtains.components.entity
             }
         }
 
-        private void ComboBox_SelectedItem(object sender, EventArgs e)
-        {
-            numeric.Visible = true;
-            comboBox.SelectedValueChanged -= ComboBox_SelectedItem;
-            foreach (PropertyCanvas p in properties)
-            {
-                properties[0].updateValue(numeric.Value);
-                if(!entity.containsPropertyCanvas(p))
-                    entity.addPropertyCanvas(p);
-            }
-            entity.updateProperties();
-        }
-
         private void showList(object sender, EventArgs eventArgs)
         {
             comboBox.Visible = checkBox.Checked;
             if (checkBox.Checked && properties.Count > 0)
             {
-                if (comboBox.SelectedItem == null)
+                /*if (comboBox.SelectedItem == null)
                 {
                     properties[0].updateValue(numeric.Value);
                     if (!entity.containsPropertyCanvas(properties[0]))
@@ -151,16 +200,7 @@ namespace Сalculator_for_tailoring_curtains.components.entity
                     }
                     else
                         entity.updateProperties();
-                }
-            }
-            else if (!checkBox.Checked && properties.Count > 0)
-            {
-                for (int i = 0; i < properties.Count; i++)
-                    entity.removeProperty(properties[i]);
-            }
-            if (!checkBox.Checked)
-            {
-                numeric.Visible = checkBox.Checked;
+                }*/
             }
         }
 
@@ -179,6 +219,11 @@ namespace Сalculator_for_tailoring_curtains.components.entity
             itemList.Add("Простой подгиб");
             itemList.Add("Московский шов");
             itemList.Add("Косая бейка");
+        }
+
+        public override void AddItemInList(string item, decimal value, decimal numMin, decimal numMax, decimal numStep)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Сalculator_for_tailoring_curtains.components.entity;
 
 namespace Сalculator_for_tailoring_curtains
 {
@@ -9,10 +10,12 @@ namespace Сalculator_for_tailoring_curtains
     {
         private static List<CanvasEntity> listCanvas;
         private static OrderEntity _instance;
+        private static ClientEntity client;
 
         private OrderEntity()
         {
             listCanvas = new List<CanvasEntity>();
+            client = new ClientEntity();
         }
 
         public static OrderEntity Instance
@@ -23,6 +26,11 @@ namespace Сalculator_for_tailoring_curtains
                     _instance = new OrderEntity();
                 return _instance;
             }
+        }
+
+        public ClientEntity GetClient()
+        {
+            return client;
         }
 
         public static void CreateInstance()

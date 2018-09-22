@@ -97,6 +97,11 @@ namespace Сalculator_for_tailoring_curtains
             updateProperties();
         }
 
+        public List<PropertyCanvas> GetPropertiesCanvas()
+        {
+            return this.properties;
+        }
+
         public bool containsPropertyCanvas(PropertyCanvas property)
         {
             return properties.Contains(property);

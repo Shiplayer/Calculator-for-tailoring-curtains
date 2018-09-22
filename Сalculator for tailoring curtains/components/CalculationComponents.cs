@@ -45,26 +45,29 @@ namespace Сalculator_for_tailoring_curtains.components
             heightNumericBox = new TextBox();
             components = new List<AbstractComponent>();
             ComponentWithListAndInput component1 = new ComponentWithListAndInput(entity);
-            component1.SetName("Боковины");
+            component1.SetName("Боковины (см)");
             component1.AddItemInList("Простой подгиб");
             component1.AddItemInList("Московский шов");
             component1.AddItemInList("Косая бейка");
             PropertyCanvas property = new PropertyCanvas((x, y) => { return y + x * 4; });
             property.TypeProperties = PropertyCanvas.TYPE_OF_PROPERTIES.WIDTH;
             component1.AddPropertyCanvas(property);
+
             components.Add(component1);
+
             ComponentWithInput component2 = new ComponentWithInput(entity, 5, 50, 1);
-            component2.SetName("Дополнительная  обработка боковины \"Ушки\"");
+            component2.SetName("Дополнительная  обработка боковины \"Ушки\" (см)");
             property = new PropertyCanvas((x, y) => { Console.Out.WriteLine("result = " + (y + x * 2)); return y + x * 2; });
             property.TypeProperties = PropertyCanvas.TYPE_OF_PROPERTIES.WIDTH;
             component2.AddPropertyCanvas(property);
             //PropertyCanvas property = new PropertyCanvas();
             //property.function = generateFunction();
             //componentWithInput.PropertyCanvas = new PropertyCanvas();
+
             components.Add(component2);
 
             ComponentWithInput component3 = new ComponentWithInput(entity);
-            component3.SetName("Подгиб низа");
+            component3.SetName("Подгиб низа (см)");
             property = new PropertyCanvas((x, y) => { return y + x * 2; });
             property.TypeProperties = PropertyCanvas.TYPE_OF_PROPERTIES.HEIGHT;
             component3.AddPropertyCanvas(property);
@@ -72,7 +75,7 @@ namespace Сalculator_for_tailoring_curtains.components
             components.Add(component3);
 
             ComponentWithListAndInput component4 = new ComponentWithListAndInput(entity);
-            component4.SetName("Обработка верха без шторной ленты");
+            component4.SetName("Обработка верха без шторной ленты (см)");
             component4.AddItemInList("Простой подгиб");
             component4.AddItemInList("Московский шов");
             component4.AddItemInList("Косая бейка");
@@ -97,10 +100,11 @@ namespace Сalculator_for_tailoring_curtains.components
             property.updateValue(6);
             property.TypeProperties = PropertyCanvas.TYPE_OF_PROPERTIES.HEIGHT;
             component5.AddPropertyCanvas(property);
+
             components.Add(component5);
 
             ComponentWithInput component6 = new ComponentWithInput(entity);
-            component6.SetName("Дополнительная обработка \"Гребешок\"");
+            component6.SetName("Дополнительная обработка \"Гребешок\" (см)");
             property = new PropertyCanvas((x, y) => { return y + x * 2; });
             property.TypeProperties = PropertyCanvas.TYPE_OF_PROPERTIES.HEIGHT;
             component6.AddPropertyCanvas(property);
@@ -118,52 +122,6 @@ namespace Сalculator_for_tailoring_curtains.components
             component7.AddPropertyCanvas(property);
 
             components.Add(component7);
-
-
-            /*using (XmlReader reader = XmlReader.Create(new StringReader(Resources.testData)))
-            {
-                components = new List<AbstractComponent>();
-                AbstractComponent component = null;
-                reader.MoveToContent();
-                while (reader.Read())
-                {
-                    if (reader.NodeType == XmlNodeType.Element)
-                    {
-                        switch (reader.Name)
-                        {
-                            case "CalculationComponents":
-                                Console.Out.WriteLine("Create root component");
-                                break;
-                            case "Component":
-                                int type = Int32.Parse(reader.GetAttribute("type"));
-                                component = ComponentFactory.getComponent(type);
-                                
-                                break;
-                            case "Name":
-                                component.SetName(reader.ReadElementContentAsString());
-                                break;
-                            case "Description":
-                                component.SetDescription(reader.ReadElementContentAsString());
-                                break;
-                            case "KeyValue":
-                                Console.Out.WriteLine("KeyValue content started");
-                                break;
-                            case "key":
-                                component.addKeyValue(reader.ReadElementContentAsString(), reader.GetAttribute("value"));
-                                break;
-                        }
-                    }
-                    else if(reader.NodeType == XmlNodeType.EndElement)
-                    {
-                        switch (reader.Name)
-                        {
-                            case "Component":
-                                components.Add(component);
-                                break;
-                        }
-                    }
-                }
-            }*/
         }
 
         public GroupBox getRootComponent()
@@ -194,7 +152,6 @@ namespace Сalculator_for_tailoring_curtains.components
                 contentPanel = new Panel();
                 contentPanel.Dock = DockStyle.Fill;
                 contentPanel.AutoSize = true;
-                contentPanel.BackColor = Color.Aqua;
                 GroupBox boxTulleSize = new GroupBox();
                 boxTulleSize.AutoSize = true;
                 boxTulleSize.Location = new System.Drawing.Point(3, 3);
@@ -202,7 +159,7 @@ namespace Сalculator_for_tailoring_curtains.components
                 contentPanel.Controls.Add(boxTulleSize);
 
                 Label widthLabel = new Label();
-                widthLabel.Text = "Ширина:";
+                widthLabel.Text = "Ширина (см):";
                 widthLabel.Location = new System.Drawing.Point(6, 22);
                 widthLabel.Margin = new Padding(3);
                 boxTulleSize.Controls.Add(widthLabel);
@@ -217,7 +174,7 @@ namespace Сalculator_for_tailoring_curtains.components
                 boxTulleSize.Controls.Add(widthNumeric);
 
                 Label heightLabel = new Label();
-                heightLabel.Text = "Высота:";
+                heightLabel.Text = "Высота (см):";
                 heightLabel.Margin = new Padding(3);
                 heightLabel.Location = new System.Drawing.Point(widthLabel.Location.X, widthLabel.Location.Y + widthLabel.Height + widthNumeric.Margin.Top + heightLabel.Margin.Top);
                 boxTulleSize.Controls.Add(heightLabel);
@@ -226,6 +183,7 @@ namespace Сalculator_for_tailoring_curtains.components
                 heightNumeric.Minimum = 120;
                 heightNumeric.Maximum = 500;
                 heightNumeric.Value = entity.Height;
+                heightNumeric.ValueChanged += UpdateValue;
                 heightNumeric.Margin = new Padding(3);
                 heightNumeric.Location = new Point(heightLabel.Location.X + heightLabel.Width + heightLabel.Margin.Right + heightNumeric.Margin.Left, heightLabel.Location.Y + deltaY);
 
@@ -239,11 +197,11 @@ namespace Сalculator_for_tailoring_curtains.components
                 contentPanel.Controls.Add(box);
 
                 Label widthLabelBox = new Label();
-                widthLabelBox.Text = "Ширина:";
+                widthLabelBox.Text = "Ширина (см):";
                 widthLabelBox.Location = new System.Drawing.Point(6, 22);
                 widthLabelBox.Margin = new Padding(3);
                 Label heightLabelBox = new Label();
-                heightLabelBox.Text = "Высота:";
+                heightLabelBox.Text = "Высота (см):";
                 heightLabelBox.Margin = new Padding(3);
                 heightLabelBox.Location = new System.Drawing.Point(widthLabelBox.Location.X, widthLabelBox.Location.Y + widthLabelBox.Height + widthNumeric.Margin.Top + heightLabelBox.Margin.Top);
 
@@ -287,7 +245,15 @@ namespace Сalculator_for_tailoring_curtains.components
 
         private void Parent_Resize(object sender, EventArgs e)
         {
-            groupBox.Width = groupBox.Parent.ClientSize.Width - 6;
+            if (groupBox != null && groupBox.Parent != null)
+            {
+                groupBox.Width = groupBox.Parent.ClientSize.Width - 6;
+                Console.Out.WriteLine(groupBox.Parent.AccessibleName);
+            }
+            else
+            {
+                Console.Out.WriteLine("groupBox != null = " + (groupBox != null) + "; groupBox.Parent != null = " + (groupBox.Parent != null));
+            }
         }
 
         private void GroupBox_SizeChanged(object sender, EventArgs e)
